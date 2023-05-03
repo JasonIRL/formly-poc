@@ -1,32 +1,156 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { FormlyFieldConfig } from "@ngx-formly/core";
 
 @Component({
-  selector: 'app-root',
-  template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center" class="content">
-      <h1>
-        Welcome to {{title}}!
-      </h1>
-      <span style="display: block">{{ title }} app is running!</span>
-      <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-    </div>
-    <h2>Here are some links to help you start: </h2>
-    <ul>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-      </li>
-    </ul>
-    
-  `,
-  styles: []
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  title = 'formly-poc';
+  theForm = new FormGroup({});
+  options: any;
+  hideFields: boolean = false;
+  theModel = {
+    field1: "",
+    field2: "",
+    field3: "",
+    field4: "",
+    field5: "",
+    field6: "",
+    field7: "",
+    field8: "",
+    field9: "",
+    field10: "",
+  };
+  fields: FormlyFieldConfig[] = [
+    {
+      fieldGroupClassName: "group-wrapper",
+      fieldGroup: [
+        {
+          className: "col-span-1 row-span-4",
+          type: "input",
+          key: "field1",
+          templateOptions: {
+            label: "Field 1",
+          },
+        },
+        // Field 2 is hidden, and the grid layout allows field 3
+        // to flow into its space, until it is unhidden
+        // This field is also using the row-span-9 class, which
+        // will cause it to take up 9 rows, re-flowing the other
+        // fields in the group
+        {
+          className: "col-span-2 row-span-9",
+          type: "input",
+          key: "field2",
+          hideExpression: () => this.hideFields,
+          templateOptions: {
+            label: "Field 2",
+          },
+        },
+        {
+          className: "col-span-1 row-span-2",
+          type: "input",
+          key: "field3",
+          templateOptions: {
+            label: "Field 3",
+          },
+        },
+        {
+          // not specifiying a class here will cause this field
+          // to take up one column and one row, and flow into
+          // the next available space
+          className: "",
+          type: "input",
+          key: "field4",
+          templateOptions: {
+            label: "Field 4",
+          },
+        },
+        {
+          className: "row-start-7 col-span-3",
+          type: "input",
+          key: "field5",
+          templateOptions: {
+            label: "Field 5",
+          },
+        },
+      ],
+    },
+    // The second group is in its own group-wrapper
+    // so that those fields can flow independently
+    // of the first group and not look out of place
+    {
+      fieldGroupClassName: "group-wrapper",
+      fieldGroup: [
+        {
+          // this field is using the row-start-2 class, moving it
+          // down to the second row
+          // This field is also hidden, and the grid layout allows
+          // field 7 to flow into its space, until it is unhidden
+          className: "col-span-1 row-span-3 row-start-2",
+          type: "input",
+          key: "field6",
+          hideExpression: () => this.hideFields,
+          templateOptions: {
+            label: "Field 6",
+          },
+        },
+        {
+          className: "row-start-2",
+          type: "input",
+          key: "field7",
+          templateOptions: {
+            label: "Field 7",
+          },
+        },
+        {
+          className: "col-span-1",
+          type: "input",
+          key: "field8",
+          templateOptions: {
+            label: "Field 8",
+          },
+        },
+        {
+          className: "",
+          type: "input",
+          key: "field9",
+          templateOptions: {
+            label: "Field 9",
+          },
+        },
+        {
+          className: "col-span-3",
+          type: "input",
+          key: "field10",
+          templateOptions: {
+            label: "Field 10",
+          },
+        },
+      ],
+    },
+  ];
+
+  onSubmit(model: unknown) {
+    console.table(model);
+    this.reset();
+  }
+
+  reset() {
+    this.theForm.reset();
+    this.theModel = {
+      field1: "",
+      field2: "",
+      field3: "",
+      field4: "",
+      field5: "",
+      field6: "",
+      field7: "",
+      field8: "",
+      field9: "",
+      field10: "",
+    };
+  }
 }

@@ -1,27 +1,15 @@
 # FormlyPoc
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.7.
+This is a proof of concept for using v5 [Angular Formly](https://v5.formly.dev/)
+in a responsive grid layout.
 
-## Development server
+This is meant to be a starting point for a more complex form, but showcases how
+a JSON form object can be broken into smaller grid sections. Each section can
+have a different number of columns, and the form fields can be placed in a way that can re-flow as the screen size changes.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+the bulk of the POC is creating css utility classes that can be used to place
+the form fields in the grid. Comments in the code explain the approach.
 
-## Code scaffolding
+## Running the project
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.

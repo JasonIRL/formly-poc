@@ -1,0 +1,120 @@
+// Either need to ng-deep or use ViewEncapsulation.None
+// I prefer ng-deep, because turning off encapsulation can have unintended consequences
+:host::ng-deep formly-form {
+  * {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  formly-field {
+    // this border is for debugging purposes only
+    border: 1px solid #5d3a9b;
+  }
+
+  .group-wrapper {
+    display: grid;
+    // this border is for debugging purposes only
+    border: 1px solid #e66100;
+    gap: 1rem;
+
+    /**
+    * The following media queries are based on the Tailwind CSS grid breakpoints,
+    * and are used to set the number of columns in the grid.
+    * They can be changed to suit your needs.
+    *
+    * https://tailwindcss.com/docs/responsive-design#breakpoints
+    * https://developer.mozilla.org/en-US/docs/Web/CSS/@media
+    */
+
+    // small screens
+    @media all and (min-width: 640px) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    // medium screens
+    @media all and (min-width: 768px) {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    // large screens
+    @media all and (min-width: 1024px) {
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+    }
+
+    // extra large screens
+    @media all and (min-width: 1280px) {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    // extra extra large screens
+    @media all and (min-width: 1536px) {
+      grid-template-columns: repeat(14, minmax(0, 1fr));
+    }
+  }
+
+  /**
+  * The following mixins are based on the Tailwind CSS grid column and row utilities,
+  * and are used to generate the column and row classes.
+  * They can be changed to suit your needs.
+  *
+  * https://tailwindcss.com/docs/grid-template-columns
+  * https://tailwindcss.com/docs/grid-column
+  * https://tailwindcss.com/docs/grid-template-rows
+  * https://tailwindcss.com/docs/grid-row
+  */
+
+  @mixin grid-cols-x {
+    @for $i from 1 through 14 {
+      .grid-cols-#{$i} {
+        grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+      }
+    }
+  }
+
+  @mixin grid-rows-x {
+    @for $i from 1 through 999 {
+      .grid-rows-#{$i} {
+        grid-template-rows: repeat(#{$i}, minmax(0, 1fr));
+      }
+    }
+  }
+
+  @mixin col-span-x {
+    @for $i from 1 through 14 {
+      .col-span-#{$i} {
+        grid-column: span #{$i} / span #{$i};
+      }
+    }
+  }
+
+  @mixin col-start-x {
+    @for $i from 1 through 14 {
+      .col-start-#{$i} {
+        grid-column-start: #{$i};
+      }
+    }
+  }
+
+  @mixin row-span-x {
+    @for $i from 1 through 999 {
+      .row-span-#{$i} {
+        grid-row: span #{$i} / span #{$i};
+      }
+    }
+  }
+
+  @mixin row-start-x {
+    @for $i from 1 through 999 {
+      .row-start-#{$i} {
+        grid-row-start: #{$i};
+      }
+    }
+  }
+
+  @include grid-cols-x;
+  @include grid-rows-x;
+  @include col-span-x;
+  @include col-start-x;
+  @include row-span-x;
+  @include row-start-x;
+}

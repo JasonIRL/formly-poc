@@ -1,0 +1,38 @@
+<div>
+  <p>
+    This button is used to hide and unhide select fields, showcasing how the
+    formly grid layout will reflow the fields to fit the available space.
+  </p>
+  <button
+    type="button"
+    (click)="hideFields = !hideFields"
+    style="margin-bottom: 12px"
+  >
+    {{ hideFields ? "show hidden fields" : "hide fields" }}
+  </button>
+</div>
+
+<form [formGroup]="theForm" (ngSubmit)="onSubmit(theModel)">
+  <formly-form
+    lazy
+    id="formly-body"
+    [model]="theModel"
+    [options]="options"
+    [fields]="fields"
+    [form]="theForm"
+  ></formly-form>
+  <div>
+    <p>
+      These buttons are used to submit the form, and to reset the form to the
+      initial "empty" state.
+    </p>
+    <p>
+      Submitting the form will log the form model to the console, as well as
+      reset the form to the initial "empty" state.
+    </p>
+    <div style="display: flex; margin-top: 12px; column-gap: 12px">
+      <button type="submit">Submit</button>
+      <button type="button" (click)="reset()">Reset Form Demo</button>
+    </div>
+  </div>
+</form>
